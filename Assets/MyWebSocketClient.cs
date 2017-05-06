@@ -38,9 +38,11 @@ public class MyWebSocketClient : MonoBehaviour, WebSocketUnityDelegate, IWebSock
 
     public static AVIMClient ClientInstance { get; set; }
 
+    public static string NameHandler { get; set; }
+
     void Awake()
     {
-
+        NameHandler = this.gameObject.name;
     }
     void Start()
     {
@@ -120,9 +122,14 @@ public class MyWebSocketClient : MonoBehaviour, WebSocketUnityDelegate, IWebSock
         webSocket.Close();
     }
 
-    public void Open(string url, string protocol = null)
+    public void init(string url)
     {
         webSocket = new WebSocketUnity(url, this);
+    }
+
+    public void Open(string url, string protocol = null)
+    {
+        init(url);
         webSocket.Open();
     }
 
